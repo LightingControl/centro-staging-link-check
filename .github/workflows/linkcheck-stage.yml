@@ -1,0 +1,39 @@
+name: Staging link check
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "URL to crawl"
+        required: false
+        default: "https://webstage.centro.network"
+  schedule:
+    # every day at 06:15 UTC
+    - cron: "15 6 * * *"
+
+concurrency:
+  group: link-check
+  cancel-in-progress: true
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run linkinator
+        run: |
+          TARGET="${{ inputs.target || 'https://webstage.centro.network' }}"
+          echo "Crawling: $TARGET"
+
+          npx linkinator "$TARGET" \
+            --recurse \
+            --timeout 20000 \
+            --concurrency 6 \
+            --skip "mailto:|tel:" \
+            --silent

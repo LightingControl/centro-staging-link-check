@@ -36,5 +36,6 @@ jobs:
             --timeout 20000 \
             --concurrency 6 \
             --skip "mailto:|tel:" \
+            --skip "/_next/image" \
             --silent
-            --skip "/_next/image"
+            

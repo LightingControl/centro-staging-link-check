@@ -37,3 +37,4 @@ jobs:
             --concurrency 6 \
             --skip "mailto:|tel:" \
             --silent
+            --skip "/_next/image"

@@ -36,6 +36,8 @@ jobs:
             --timeout 20000 \
             --concurrency 6 \
             --skip "mailto:|tel:" \
+            --skip "/cdn-cgi/l/email-protection" \
+            --skip "mailto:|tel:|/_next/image|favicon|apple-touch-icon|site.webmanifest|/cdn-cgi/l/email-protection|cloudflare.com/sign-up" \
             --skip "/_next/image" \
             --silent
             
